@@ -8,18 +8,21 @@ public class InputController : MonoBehaviour
     LettersController[] letters;
     [TextArea][SerializeField] string wordsList;
 
+    GPSLeaderBoard leaderBoard;
     AudioManager audioManager;
+
     [SerializeField] TMP_Text inputZone;
     [SerializeField] TMP_Text wordsAmount;
     [SerializeField] TMP_Text totalWordsAmount;
 
-
+    [SerializeField] GameObject forHints;
     [SerializeField] GameObject noWordsZone;
     [SerializeField] GameObject plaseForScore;
     [SerializeField] GameObject textPrefab;
     [SerializeField] GameObject wordIsFinded;
     [SerializeField] GameObject wordZone;
     [SerializeField] GameObject findedWordsZone;
+    [SerializeField] GameObject winWindow;
    
     [SerializeField] string lvlKey;
     string currentWord="";
@@ -46,6 +49,7 @@ public class InputController : MonoBehaviour
     {
         findedWords = findedWordsZone.GetComponentsInChildren<FindedWord>();
         letters = wordZone.GetComponentsInChildren<LettersController>();
+        leaderBoard = GPSLeaderBoard.instance;
         string[] temp = wordsList.Split(',');
         audioManager = AudioManager.instanse;
         foreach(string s in temp)
@@ -60,6 +64,7 @@ public class InputController : MonoBehaviour
         Load();
         wordsAmount.text = x.ToString();
         totalWordsAmount.text = words.Count.ToString();
+        InvokeRepeating("UpdateLeaderBoard", 2f, 2f);
     }
 
     private void Load()
@@ -85,12 +90,28 @@ public class InputController : MonoBehaviour
         }
     }
 
+    public void AddLetter(char letter)
+    {
+        audioManager.Play("Letter");
+        currentWord += letter;
+        inputZone.text = currentWord;
+    }
+
+    public void RemoveWord()
+    {
+        currentWord = "";
+        inputZone.text = currentWord;
+        foreach (LettersController letter in letters)
+        {
+            letter.gameObject.SetActive(true);
+        }
+    }
+
     public void CheckWord()
     {
         if (wordsTemp.Contains(currentWord))
         {
-            int findedWordsAmount = PlayerPrefs.GetInt("Words" + lvlKey);
-            int tillTip =  PlayerPrefs.GetInt("TillHint",0);
+
             audioManager.Play("AddedWord");
             wordsTemp.Remove(currentWord);
             foreach (FindedWord finded in findedWords)
@@ -98,22 +119,30 @@ public class InputController : MonoBehaviour
                 if (finded.SavedWord == currentWord)
                 {
                     finded.AddWord(currentWord);
+                    #region Parameters
+                    int findedWordsAmount = PlayerPrefs.GetInt("Words" + lvlKey);
+                    int tillTip = PlayerPrefs.GetInt("TillHint", 0);
                     string toSave = PlayerPrefs.GetString("Save" + lvlKey);
                     toSave += (currentWord + ",");
                     findedWordsAmount++;
                     PlayerPrefs.SetString("Save" + lvlKey, toSave);
                     PlayerPrefs.SetInt("Words" + lvlKey, findedWordsAmount);
+                    PlayerPrefs.SetInt("FindedWords", PlayerPrefs.GetInt("FindedWords", 0) + 1);
+                    Debug.Log(PlayerPrefs.GetInt("FindedWords", 0));
                     tillTip++;
                     if (tillTip ==5)
                     {
-                        Debug.Log("Here");
                         tillTip = 0;
+                        Instantiate(textPrefab, forHints.transform);
                         PlayerPrefs.SetInt("Hints", PlayerPrefs.GetInt("Hints") + 1);
                     }
                     PlayerPrefs.SetInt("TillHint", tillTip);
+                    #endregion
                     x++;
                     wordsAmount.text = x.ToString();
                     Instantiate(textPrefab, plaseForScore.transform);
+                    if (findedWordsAmount == words.Count)
+                        Win();
                     break;
                 }
             }
@@ -130,18 +159,19 @@ public class InputController : MonoBehaviour
 
     }
 
+    #region Windows
+
+    public void CloseWinWindow()
+    {
+        winWindow.SetActive(false);
+    }
+
     public void ActivateMessage()
     {
         audioManager.Play("OpenWindow");
         wordIsFinded.SetActive(!wordIsFinded.activeInHierarchy);
     }
 
-    public void AddLetter(char letter)
-    {
-        audioManager.Play("Letter");
-        currentWord += letter;
-        inputZone.text = currentWord;
-    }
 
     public void NoWordsZone()
     {
@@ -150,13 +180,17 @@ public class InputController : MonoBehaviour
         noWordsZone.GetComponent<NoWordController>().TakeWord(currentWord);
     }
 
-    public void RemoveWord()
+
+    void Win()
     {
-        currentWord = "";
-        inputZone.text = currentWord;
-        foreach (LettersController letter in letters)
-        {
-            letter.gameObject.SetActive(true);
-        }
+        audioManager.Play("Win");
+        winWindow.SetActive(true);
+        PlayerPrefs.SetInt("FinishedLvls", PlayerPrefs.GetInt("FinishedLvls", 0) + 1);
+        leaderBoard.UpdateLeaderBoardScore("FinishedLvls", 1);
+    }
+    #endregion
+    void UpdateLeaderBoard()
+    {
+        leaderBoard.UpdateLeaderBoardScore("FindedWords", 0);
     }
 }

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6048278515551854044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6048278515551854042}
+  - component: {fileID: 6048278515551854045}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6048278515551854042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048278515551854044}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6048278515551854045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048278515551854044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f637415c43cc7d48b76128303611161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Button
+    sourse: {fileID: 0}
+    clip: {fileID: 8300000, guid: 2b82de16fce9cfc42803e1a5f9a206be, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Letter
+    sourse: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4c033b71872a9e442a5019867454f93b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: OpenWindow
+    sourse: {fileID: 0}
+    clip: {fileID: 8300000, guid: 173860a439c84734d9a245d4a90fe2e2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: AddedWord
+    sourse: {fileID: 0}
+    clip: {fileID: 8300000, guid: f9d3213f06730304e87c21af27e01796, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: NoWord
+    sourse: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8e2a4bd23b0f4ab42bc874931b48db3d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: RemoveWord
+    sourse: {fileID: 0}
+    clip: {fileID: 8300000, guid: 769a8970c74e83b4dad73424a9aba511, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Win
+    sourse: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4c6ac193d84194f41a1722591870338f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0

@@ -36,6 +36,11 @@ public class InGameMenuController : MonoBehaviour
     public void Reset()
     {
         PlayerPrefs.DeleteKey("Save" + lvlKey);
+        int totalWords = PlayerPrefs.GetInt("FindedWords", 0);
+        int words = PlayerPrefs.GetInt("Words" + lvlKey);
+        totalWords -= words;
+        PlayerPrefs.DeleteKey("Words" + lvlKey);
+        PlayerPrefs.SetInt("FindedWords", totalWords);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
