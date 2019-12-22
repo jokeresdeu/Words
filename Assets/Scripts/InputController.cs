@@ -141,7 +141,7 @@ public class InputController : MonoBehaviour
                     x++;
                     wordsAmount.text = x.ToString();
                     Instantiate(textPrefab, plaseForScore.transform);
-                    if (findedWordsAmount == words.Count)
+                    if (findedWordsAmount == words.Count+1)
                         Win();
                     break;
                 }

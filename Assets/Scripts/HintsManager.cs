@@ -20,8 +20,12 @@ public class HintsManager : MonoBehaviour
     {
         input = InputController.instance;
         tempHints = hints.Split('!');
-        for(int x = 0; x<tempHints.Length; x++)
+        Debug.Log(input.Words.Count);
+        Debug.Log(tempHints.Length);
+        for (int x = 0; x<tempHints.Length; x++)
         {
+            //Debug.Log(input.Words[x]);
+            //Debug.Log(tempHints[x]);
             hintsList.Add(input.Words[x], tempHints[x]);
         }
     }
