@@ -101,8 +101,6 @@ public class InputController : MonoBehaviour
 
     public void RemoveWord()
     {
-        if (PlayerPrefs.GetInt("Pause", 0) == 1)
-            return;
         currentWord = "";
         inputZone.text = currentWord;
         foreach (LettersController letter in letters)
@@ -179,21 +177,10 @@ public class InputController : MonoBehaviour
     }
     public void NoWordsZone()
     {
-        if(noWordsZone.activeInHierarchy)
-        {
-            noWordsZone.SetActive(false);
-            PlayerPrefs.SetInt("Pause",1);
-        }
-        else
-        {
-            if (PlayerPrefs.GetInt("Pause", 0) == 1 && !wordIsFinded.activeInHierarchy)
-                return;
             audioManager.Play("NoWord");
             PlayerPrefs.SetInt("Pause", 1);
             noWordsZone.SetActive(true);
-            noWordsZone.GetComponent<NoWordController>().TakeWord(currentWord);
-
-        }
+            noWordsZone.GetComponent<NoWordController>().TakeWord(currentWord, lvlKey);
     }
     void Win()
     {
