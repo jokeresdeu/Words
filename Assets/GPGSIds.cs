@@ -25,7 +25,6 @@
 public static class GPGSIds
 {
         public const string leaderboard_finded_words = "CgkIlMzQ0KkbEAIQAA"; // <GPGSID>
-        public const string leaderboard_complete_levels = "CgkIlMzQ0KkbEAIQAQ"; // <GPGSID>
 
 }
 

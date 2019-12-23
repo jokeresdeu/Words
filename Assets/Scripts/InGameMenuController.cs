@@ -9,9 +9,13 @@ public class InGameMenuController : MonoBehaviour
     [SerializeField] Sprite soundOn;
     [SerializeField] Sprite soundOf;
     [SerializeField] Image sound;
-    [SerializeField] string lvlKey;
+    string lvlKey;
     [SerializeField] GameObject inGameShop;
-
+    private void Start()
+    {
+        PlayerPrefs.SetInt("Pause", 0);
+        lvlKey = SceneManager.GetActiveScene().buildIndex.ToString();
+    }
     public void Quit()
     {
         Application.Quit();
@@ -46,6 +50,10 @@ public class InGameMenuController : MonoBehaviour
 
     public void InGameShop()
     {
+        int pause = PlayerPrefs.GetInt("Pause", 0);
+        if (pause == 1 && !inGameShop.activeInHierarchy)
+            return;
+        PlayerPrefs.SetInt("Pause", Mathf.Abs(pause - 1));
         inGameShop.SetActive(!inGameShop.activeInHierarchy);
     }
 }

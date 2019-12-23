@@ -12,6 +12,8 @@ public class LettersController : MonoBehaviour
     }
     public void UseLetter()
     {
+        if (PlayerPrefs.GetInt("Pause", 0) == 1)
+            return;
         inputController.AddLetter(letter);
         gameObject.SetActive(false);
     }

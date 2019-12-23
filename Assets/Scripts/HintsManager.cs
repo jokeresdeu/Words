@@ -35,9 +35,12 @@ public class HintsManager : MonoBehaviour
     }
     public void ShowHint()
     {
+        if (PlayerPrefs.GetInt("Pause", 0) == 1 && hintsField.activeInHierarchy == false)
+            return;
         int hintsAmount = PlayerPrefs.GetInt("Hints", 0);
         if(!hintsField.activeInHierarchy)
         {
+            PlayerPrefs.SetInt("Pause", 1);
             if(hintsAmount > 0 )
             {
                 hintsField.SetActive(true);
@@ -54,7 +57,11 @@ public class HintsManager : MonoBehaviour
                 
         }
         else
+        {
+            PlayerPrefs.SetInt("Pause", 0);
             hintsField.SetActive(false);
+        }
+            
     }
     private void AnimationOff()
     {

@@ -17,11 +17,13 @@ public class NoWordController : MonoBehaviour
     public void AddWord()
     {
         //Add Word to dictionary
+        PlayerPrefs.SetInt("Pause", 0);
         gameObject.SetActive(false);
     }
 
     public void DontAdd()
     {
+        PlayerPrefs.SetInt("Pause", 0);
         gameObject.SetActive(false);
     }
 }

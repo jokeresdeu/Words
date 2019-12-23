@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms;
 
 public class GPSLeaderBoard : MonoBehaviour
 {
-    string[] leaderBoardID;
+    string leaderBoardID = "CgkIlMzQ0KkbEAIQAA";
     #region Singleton
     public static GPSLeaderBoard instance;
     private void Awake()
@@ -14,19 +14,20 @@ public class GPSLeaderBoard : MonoBehaviour
         if (instance == null)
             instance = this;
         else Destroy(gameObject);
-        leaderBoardID = new string[] { "CgkIlMzQ0KkbEAIQAA", "CgkIlMzQ0KkbEAIQAQ"};
     }
-
+    private void Start()
+    {
+        InvokeRepeating("UpdateLeaderBoardScore", 20f, 120f);
+    }
     #endregion
-    public void OpenLeaderBoard(int lvl)
+    public void OpenLeaderBoard()
     {
-        PlayGamesPlatform.Instance.ShowLeaderboardUI(leaderBoardID[lvl]);
+        PlayGamesPlatform.Instance.ShowLeaderboardUI(leaderBoardID);
     }
-    public void UpdateLeaderBoardScore(string parametr, int id)
+    public void UpdateLeaderBoardScore()
     {
-        int score = PlayerPrefs.GetInt(parametr, 0);
-        Debug.Log(score);
-        Social.ReportScore(score, leaderBoardID[id], (bool success) => { });
+        int score = PlayerPrefs.GetInt("FindedWords", 0);
+        Social.ReportScore(score, leaderBoardID, (bool success) => { });
     }
 }
 

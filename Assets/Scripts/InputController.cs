@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class InputController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class InputController : MonoBehaviour
     LettersController[] letters;
     [TextArea][SerializeField] string wordsList;
 
-    GPSLeaderBoard leaderBoard;
+   
     AudioManager audioManager;
 
     [SerializeField] TMP_Text inputZone;
@@ -24,7 +25,7 @@ public class InputController : MonoBehaviour
     [SerializeField] GameObject findedWordsZone;
     [SerializeField] GameObject winWindow;
    
-    [SerializeField] string lvlKey;
+    string lvlKey;
     string currentWord="";
 
     List<string> words = new List<string>();
@@ -47,9 +48,9 @@ public class InputController : MonoBehaviour
 
     void Start()
     {
+        lvlKey = SceneManager.GetActiveScene().buildIndex.ToString();
         findedWords = findedWordsZone.GetComponentsInChildren<FindedWord>();
         letters = wordZone.GetComponentsInChildren<LettersController>();
-        leaderBoard = GPSLeaderBoard.instance;
         string[] temp = wordsList.Split(',');
         audioManager = AudioManager.instanse;
         foreach(string s in temp)
@@ -64,11 +65,12 @@ public class InputController : MonoBehaviour
         Load();
         wordsAmount.text = x.ToString();
         totalWordsAmount.text = words.Count.ToString();
-        InvokeRepeating("UpdateLeaderBoard", 2f, 2f);
     }
 
     private void Load()
     {
+        if (!PlayerPrefs.HasKey("Save" + lvlKey))
+            PlayerPrefs.SetString("Save" + lvlKey, "");
         string save = PlayerPrefs.GetString("Save" + lvlKey);
         string[] temp = save.Split(',');
         if (temp.Length > 0)
@@ -99,6 +101,8 @@ public class InputController : MonoBehaviour
 
     public void RemoveWord()
     {
+        if (PlayerPrefs.GetInt("Pause", 0) == 1)
+            return;
         currentWord = "";
         inputZone.text = currentWord;
         foreach (LettersController letter in letters)
@@ -109,6 +113,8 @@ public class InputController : MonoBehaviour
 
     public void CheckWord()
     {
+        if (PlayerPrefs.GetInt("Pause", 0) == 1)
+            return;
         if (wordsTemp.Contains(currentWord))
         {
 
@@ -128,7 +134,6 @@ public class InputController : MonoBehaviour
                     PlayerPrefs.SetString("Save" + lvlKey, toSave);
                     PlayerPrefs.SetInt("Words" + lvlKey, findedWordsAmount);
                     PlayerPrefs.SetInt("FindedWords", PlayerPrefs.GetInt("FindedWords", 0) + 1);
-                    Debug.Log(PlayerPrefs.GetInt("FindedWords", 0));
                     tillTip++;
                     if (tillTip ==5)
                     {
@@ -161,36 +166,46 @@ public class InputController : MonoBehaviour
 
     #region Windows
 
-    public void CloseWinWindow()
-    {
-        winWindow.SetActive(false);
-    }
+    
 
     public void ActivateMessage()
     {
+        int pause = PlayerPrefs.GetInt("Pause", 0);
+        if (pause == 1 && !wordIsFinded.activeInHierarchy)
+            return;
+        PlayerPrefs.SetInt("Pause", Mathf.Abs(pause-1));
         audioManager.Play("OpenWindow");
         wordIsFinded.SetActive(!wordIsFinded.activeInHierarchy);
     }
-
-
     public void NoWordsZone()
     {
-        audioManager.Play("NoWord");
-        noWordsZone.SetActive(!noWordsZone.activeInHierarchy);
-        noWordsZone.GetComponent<NoWordController>().TakeWord(currentWord);
+        if(noWordsZone.activeInHierarchy)
+        {
+            noWordsZone.SetActive(false);
+            PlayerPrefs.SetInt("Pause",1);
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("Pause", 0) == 1 && !wordIsFinded.activeInHierarchy)
+                return;
+            audioManager.Play("NoWord");
+            PlayerPrefs.SetInt("Pause", 1);
+            noWordsZone.SetActive(true);
+            noWordsZone.GetComponent<NoWordController>().TakeWord(currentWord);
+
+        }
     }
-
-
     void Win()
     {
+        PlayerPrefs.SetInt("Pause", 1);
         audioManager.Play("Win");
         winWindow.SetActive(true);
         PlayerPrefs.SetInt("FinishedLvls", PlayerPrefs.GetInt("FinishedLvls", 0) + 1);
-        leaderBoard.UpdateLeaderBoardScore("FinishedLvls", 1);
+    }
+    public void CloseWinWindow()
+    {
+        winWindow.SetActive(false);
+        PlayerPrefs.SetInt("Pause", 0);
     }
     #endregion
-    void UpdateLeaderBoard()
-    {
-        leaderBoard.UpdateLeaderBoardScore("FindedWords", 0);
-    }
 }
