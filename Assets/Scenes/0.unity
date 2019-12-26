@@ -1224,7 +1224,7 @@ PrefabInstance:
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: wordsNeeded
-      value: 400
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
@@ -1666,12 +1666,12 @@ PrefabInstance:
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: wordsNeeded
-      value: 500
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: totalWords
-      value: 92
+      value: 91
       objectReference: {fileID: 0}
     - target: {fileID: 8187081438952176298, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
@@ -2680,7 +2680,7 @@ PrefabInstance:
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: wordsNeeded
-      value: 220
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
@@ -4071,12 +4071,12 @@ PrefabInstance:
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: wordsNeeded
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: totalWords
-      value: 222
+      value: 223
       objectReference: {fileID: 0}
     - target: {fileID: 8187081438952176298, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
@@ -4600,7 +4600,7 @@ PrefabInstance:
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: wordsNeeded
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
@@ -5215,12 +5215,12 @@ PrefabInstance:
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: wordsNeeded
-      value: 350
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: totalWords
-      value: 70
+      value: 69
       objectReference: {fileID: 0}
     - target: {fileID: 8187081438952176298, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
@@ -5600,7 +5600,7 @@ PrefabInstance:
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}
       propertyPath: wordsNeeded
-      value: 230
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 7688746779652358192, guid: 8672b9a5656b6244ba56b09274f09bb0,
         type: 3}

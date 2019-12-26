@@ -43,6 +43,11 @@ public class MainMenuController : MonoBehaviour
         PlayerPrefs.SetInt("Pause", 0);
         audioManager = AudioManager.instanse;
         leftl.SetActive(false);
+
+        Debug.Log(PlayerPrefs.GetInt("Sound", 0));
+        if (PlayerPrefs.GetInt("Sound", 0) == 0)
+            sound.sprite = soundOn;
+        else sound.sprite = soundOf;
     }
     private void Update()
     {
@@ -62,14 +67,19 @@ public class MainMenuController : MonoBehaviour
     }
     public void Sound()
     {
-        audioManager.Play("Button");
         int x;
         x = PlayerPrefs.GetInt("Sound", 0);
         if (x == 0)
+        {
+            x = 1;
             sound.sprite = soundOf;
-        else sound.sprite = soundOn;
-        x -= 1;
-        PlayerPrefs.SetInt("Sound", Mathf.Abs(x));
+        }
+        else if (x == 1)
+        {
+            x = 0;
+            sound.sprite = soundOn;
+        }
+        PlayerPrefs.SetInt("Sound", x);
     }
 
     public void InGameShop()

@@ -23,8 +23,6 @@ public class HintsManager : MonoBehaviour
         tempHints = hints.Split('!');
         for (int x = 0; x<tempHints.Length; x++)
         {
-            Debug.Log(input.Words[x]);
-            Debug.Log(tempHints[x]);
             hintsList.Add(input.Words[x], tempHints[x]);
         }
     }

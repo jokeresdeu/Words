@@ -15,6 +15,9 @@ public class InGameMenuController : MonoBehaviour
     {
         PlayerPrefs.SetInt("Pause", 0);
         lvlKey = SceneManager.GetActiveScene().buildIndex.ToString();
+        if (PlayerPrefs.GetInt("Sound", 0) == 0)
+            sound.sprite = soundOn;
+        else sound.sprite = soundOf;
     }
     public void Quit()
     {
@@ -30,11 +33,17 @@ public class InGameMenuController : MonoBehaviour
     {
         int x;
         x = PlayerPrefs.GetInt("Sound", 0);
-        if (x == 0)
+        if(x==0)
+        {
+            x = 1;
             sound.sprite = soundOf;
-        else sound.sprite = soundOn;
-        x -= 1;
-        PlayerPrefs.SetInt("Sound", Mathf.Abs(x));
+        }
+        else if(x==1)
+        {
+            x = 0;
+            sound.sprite = soundOn;
+        }
+        PlayerPrefs.SetInt("Sound", x);
     }
 
     public void Reset()

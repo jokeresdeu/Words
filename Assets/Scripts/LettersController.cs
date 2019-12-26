@@ -7,6 +7,7 @@ public class LettersController : MonoBehaviour
 {
     InputController inputController;
     [SerializeField]char letter;
+    public char Letter { get { return letter; } }
     TMP_Text text;
 
     void Start()
@@ -19,7 +20,7 @@ public class LettersController : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Pause", 0) == 1)
             return;
-        inputController.AddLetter(letter);
+        inputController.AddLetter(letter, this);
         gameObject.SetActive(false);
     } 
 }

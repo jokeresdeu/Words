@@ -9,7 +9,7 @@ public class InputController : MonoBehaviour
     LettersController[] letters;
     [TextArea][SerializeField] string wordsList;
 
-   
+    List<LettersController> currentLetters = new List<LettersController>();
     AudioManager audioManager;
 
     [SerializeField] TMP_Text inputZone;
@@ -65,10 +65,6 @@ public class InputController : MonoBehaviour
         Load();
         wordsAmount.text = x.ToString();
         totalWordsAmount.text = words.Count.ToString();
-        //foreach(string s in wordsTemp)
-        //{
-        //    Debug.Log(s);
-        //}
     }
 
     private void Load()
@@ -96,15 +92,17 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void AddLetter(char letter)
+    public void AddLetter(char letter, LettersController controller)
     {
         audioManager.Play("Letter");
         currentWord += letter;
         inputZone.text = currentWord;
+        currentLetters.Add(controller);
     }
 
     public void RemoveWord()
     {
+        currentLetters.Clear();
         currentWord = "";
         inputZone.text = currentWord;
         foreach (LettersController letter in letters)
@@ -165,11 +163,29 @@ public class InputController : MonoBehaviour
         RemoveWord();
 
     }
+    public void RemoveLetter()
+    {
+        audioManager.Play("Button");
+        if (currentLetters.Count == 0)
+            return;
+        LettersController temp = currentLetters[currentLetters.Count - 1];
+        foreach (LettersController letter in letters)
+        {
+            if (letter == temp)
+            {
+                letter.gameObject.SetActive(true);
+            }
+        }
+        currentLetters.Remove(temp);
+        char[] c = currentWord.ToCharArray();
+        currentWord = "";
+        for (int i = 0; i < c.Length - 1; i++)
+            currentWord += c[i];
+        inputZone.text = currentWord;
+    }
 
     #region Windows
-
     
-
     public void ActivateMessage()
     {
         
