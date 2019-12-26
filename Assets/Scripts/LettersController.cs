@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LettersController : MonoBehaviour
 {
     InputController inputController;
     [SerializeField]char letter;
+    TMP_Text text;
+
     void Start()
     {
         inputController = InputController.instance;
+        text = GetComponentInChildren<TMP_Text>();
+
     }
     public void UseLetter()
     {
@@ -16,5 +21,5 @@ public class LettersController : MonoBehaviour
             return;
         inputController.AddLetter(letter);
         gameObject.SetActive(false);
-    }
+    } 
 }

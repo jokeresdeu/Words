@@ -26,7 +26,7 @@ public class NoWordController : MonoBehaviour
 
     public void AddWord()
     {
-        sender.AddWord(noWord, key);
+        sender.AddWord(noWord);
         PlayerPrefs.SetInt("Pause", 0);
         gameObject.SetActive(false);
     }

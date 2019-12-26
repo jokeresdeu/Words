@@ -65,6 +65,10 @@ public class InputController : MonoBehaviour
         Load();
         wordsAmount.text = x.ToString();
         totalWordsAmount.text = words.Count.ToString();
+        //foreach(string s in wordsTemp)
+        //{
+        //    Debug.Log(s);
+        //}
     }
 
     private void Load()
@@ -144,7 +148,7 @@ public class InputController : MonoBehaviour
                     x++;
                     wordsAmount.text = x.ToString();
                     Instantiate(textPrefab, plaseForScore.transform);
-                    if (findedWordsAmount == words.Count+1)
+                    if (findedWordsAmount == words.Count)
                         Win();
                     break;
                 }
@@ -168,12 +172,10 @@ public class InputController : MonoBehaviour
 
     public void ActivateMessage()
     {
-        int pause = PlayerPrefs.GetInt("Pause", 0);
-        if (pause == 1 && !wordIsFinded.activeInHierarchy)
-            return;
-        PlayerPrefs.SetInt("Pause", Mathf.Abs(pause-1));
-        audioManager.Play("OpenWindow");
-        wordIsFinded.SetActive(!wordIsFinded.activeInHierarchy);
+        
+        audioManager.Play("NoWord");
+        Instantiate(wordIsFinded, findedWordsZone.transform);
+        
     }
     public void NoWordsZone()
     {

@@ -9,6 +9,7 @@ public class HintsManager : MonoBehaviour
     [SerializeField] TMP_Text hintsText;
     [SerializeField] GameObject hintsField;
     [SerializeField] TMP_Text hintsAmountText;
+    
     [SerializeField] Animator animator;
     string[] tempHints;
     string[] tempWords;
@@ -20,18 +21,16 @@ public class HintsManager : MonoBehaviour
     {
         input = InputController.instance;
         tempHints = hints.Split('!');
-        Debug.Log(input.Words.Count);
-        Debug.Log(tempHints.Length);
         for (int x = 0; x<tempHints.Length; x++)
         {
-            //Debug.Log(input.Words[x]);
-            //Debug.Log(tempHints[x]);
+            Debug.Log(input.Words[x]);
+            Debug.Log(tempHints[x]);
             hintsList.Add(input.Words[x], tempHints[x]);
         }
     }
     private void Update()
     {
-        hintsAmountText.text = PlayerPrefs.GetInt("Hints", 0).ToString();
+        hintsAmountText.text = PlayerPrefs.GetInt("Hints", 0).ToString()+"x";
     }
     public void ShowHint()
     {
@@ -61,6 +60,7 @@ public class HintsManager : MonoBehaviour
             PlayerPrefs.SetInt("Pause", 0);
             hintsField.SetActive(false);
         }
+       
             
     }
     private void AnimationOff()

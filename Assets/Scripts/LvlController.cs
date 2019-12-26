@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class LvlController : MonoBehaviour
 {
-    bool isLvlOpen;
     [SerializeField] string lvlKey;
     [SerializeField] int totalWords;
     [SerializeField] int wordsNeeded;
@@ -19,18 +18,16 @@ public class LvlController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         button = GetComponent<Button>();
-        if(wordsNeeded<= PlayerPrefs.GetInt("FindedWords", 0))
+        if (!PlayerPrefs.HasKey("OpenLvl" + lvlKey))
+            PlayerPrefs.SetInt("OpenLvl" + lvlKey, 0);
+        if (wordsNeeded<= PlayerPrefs.GetInt("FindedWords", 0)||PlayerPrefs.GetInt("OpenLvl"+lvlKey,0)==1)
         {
-            closeMenu.SetActive(false);
-            button.enabled = true;
-            wordsFinded.text = PlayerPrefs.GetInt("Words" + lvlKey).ToString() + "/" + totalWords.ToString();
+            OpenLvl();
         }
         else
         {
-            button.enabled = false;
-            wordsToOpen.text = PlayerPrefs.GetInt("Words" + lvlKey).ToString() + "/" + wordsNeeded.ToString();
+            wordsToOpen.text = PlayerPrefs.GetInt("FindedWords",0).ToString() + "/" + wordsNeeded.ToString();
         }
         
     }
@@ -40,4 +37,22 @@ public class LvlController : MonoBehaviour
             return;
         SceneManager.LoadScene(lvlKey.ToString());
     }
+    void OpenLvl()
+    {
+        closeMenu.SetActive(false);
+        button.enabled = true;
+        wordsFinded.text = PlayerPrefs.GetInt("Words" + lvlKey).ToString() + "/" + totalWords.ToString();
+    }
+    public void UseKey()
+    {
+        
+        int hints = PlayerPrefs.GetInt("Hints", 0);
+        if (hints < 10)
+            return;
+        PlayerPrefs.SetInt("OpenLvl" + lvlKey, 1);
+        hints -= 10;
+        OpenLvl();
+        PlayerPrefs.SetInt("Hints", hints);
+    }
+    
 }

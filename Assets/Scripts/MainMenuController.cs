@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 public class MainMenuController : MonoBehaviour
 {
     AudioManager audioManager;
+    [SerializeField] TMP_Text hintsAmount;
+
     [SerializeField] GameObject about;
     [SerializeField] GameObject inGameShop;
     [Header("LvlsPanel")]
@@ -18,6 +21,8 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] Image sound;
 
+    [Header("reset")]
+    [SerializeField] bool reset;
     int activeLvlPanel;
     private void Awake()
     {
@@ -27,13 +32,21 @@ public class MainMenuController : MonoBehaviour
            PlayerPrefs.SetInt("FindedWords", 0);
         if (!PlayerPrefs.HasKey("TillHint"))
             PlayerPrefs.SetInt("TillHint", 0);
+        if (!PlayerPrefs.HasKey("Hints"))
+            PlayerPrefs.SetInt("Hints", 10);
+
     }
     private void Start()
     {
-        //PlayerPrefs.DeleteAll();
+        if(reset)
+            PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("Pause", 0);
         audioManager = AudioManager.instanse;
         leftl.SetActive(false);
+    }
+    private void Update()
+    {
+        hintsAmount.text = PlayerPrefs.GetInt("Hints", 0).ToString()+"x";
     }
     public void Quit()
     {

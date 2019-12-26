@@ -15,7 +15,6 @@ public class InAppPurchacer : MonoBehaviour, IStoreListener
             instance = this;
         }
     }
-
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
@@ -23,6 +22,7 @@ public class InAppPurchacer : MonoBehaviour, IStoreListener
     public static string fiftyTooltips = "25hints";
     public static string hundredTooltips = "50hints";
     public static string noADS = "no_ads";
+
 
     void Start()
     {
