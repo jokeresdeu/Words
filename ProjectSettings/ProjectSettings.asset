@@ -159,7 +159,7 @@ PlayerSettings:
     Android: com.LesGames.Words
     Standalone: com.Company.ProductName
   buildNumber: {}
-  AndroidBundleVersionCode: 4
+  AndroidBundleVersionCode: 8
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -248,7 +248,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 2
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/joker/Desktop/Unity/Key/key.keystore
+  AndroidKeystoreName: F:/Unity/Key/key.keystore
   AndroidKeyaliasName: blockpuzzles
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1

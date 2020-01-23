@@ -51,7 +51,7 @@ public class InputController : MonoBehaviour
         lvlKey = SceneManager.GetActiveScene().buildIndex.ToString();
         findedWords = findedWordsZone.GetComponentsInChildren<FindedWord>();
         letters = wordZone.GetComponentsInChildren<LettersController>();
-        string[] temp = wordsList.Split(',');
+        string[] temp = wordsList.Split('!');
         audioManager = AudioManager.instanse;
         foreach(string s in temp)
         {
