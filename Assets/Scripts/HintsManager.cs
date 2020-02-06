@@ -5,7 +5,7 @@ using TMPro;
 
 public class HintsManager : MonoBehaviour
 {
-    [TextArea][SerializeField] string hints;
+    [TextArea(5,15)][SerializeField] string hints;
     [SerializeField] TMP_Text hintsText;
     [SerializeField] GameObject hintsField;
     [SerializeField] TMP_Text hintsAmountText;
@@ -20,7 +20,7 @@ public class HintsManager : MonoBehaviour
     void Start()
     {
         input = InputController.instance;
-        tempHints = hints.Split('!');
+        tempHints = hints.Split(new char[] {'\n'});
         Debug.Log(tempHints.Length);
         Debug.Log(input.Words.Count);
         for (int x = 0; x<tempHints.Length; x++)

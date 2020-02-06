@@ -34,6 +34,8 @@ public class MainMenuController : MonoBehaviour
             PlayerPrefs.SetInt("TillHint", 0);
         if (!PlayerPrefs.HasKey("Hints"))
             PlayerPrefs.SetInt("Hints", 10);
+        if (!PlayerPrefs.HasKey("Panel"))
+            PlayerPrefs.SetInt("Panel", 0);
 
     }
     private void Start()
@@ -43,11 +45,12 @@ public class MainMenuController : MonoBehaviour
         PlayerPrefs.SetInt("Pause", 0);
         audioManager = AudioManager.instanse;
         leftl.SetActive(false);
-
+        LvlPanel(0);
         Debug.Log(PlayerPrefs.GetInt("Sound", 0));
         if (PlayerPrefs.GetInt("Sound", 0) == 0)
             sound.sprite = soundOn;
         else sound.sprite = soundOf;
+        SetStartPanel();
     }
     private void Update()
     {
@@ -95,6 +98,7 @@ public class MainMenuController : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Pause", 0) == 1)
             return;
+        activeLvlPanel = PlayerPrefs.GetInt("Panel", 0);
         audioManager.Play("Button");
         leftl.SetActive(true);
         right.SetActive(true);
@@ -104,6 +108,21 @@ public class MainMenuController : MonoBehaviour
         if (activeLvlPanel == 0)
             leftl.SetActive(false);
         else if (activeLvlPanel == lvlPanels.Length-1)
+            right.SetActive(false);
+        PlayerPrefs.SetInt("Panel", activeLvlPanel);
+    }
+    void SetStartPanel()
+    {
+        activeLvlPanel = PlayerPrefs.GetInt("Panel", 0);
+        for (int i=0;i<lvlPanels.Length;i++)
+        {
+            if (i == activeLvlPanel)
+                lvlPanels[i].SetActive(true);
+            else lvlPanels[i].SetActive(false);
+        }
+        if (activeLvlPanel == 0)
+            leftl.SetActive(false);
+        else if (activeLvlPanel == lvlPanels.Length - 1)
             right.SetActive(false);
     }
 

@@ -7,7 +7,7 @@ public class InputController : MonoBehaviour
 {
     FindedWord[] findedWords;
     LettersController[] letters;
-    [TextArea][SerializeField] string wordsList;
+    [TextArea(5,15)][SerializeField] string wordsList;
 
     List<LettersController> currentLetters = new List<LettersController>();
     AudioManager audioManager;
@@ -27,7 +27,6 @@ public class InputController : MonoBehaviour
    
     string lvlKey;
     string currentWord="";
-
     List<string> words = new List<string>();
     public List<string> Words { get { return words; } }
     List<string> wordsTemp = new List<string>();
@@ -51,12 +50,16 @@ public class InputController : MonoBehaviour
         lvlKey = SceneManager.GetActiveScene().buildIndex.ToString();
         findedWords = findedWordsZone.GetComponentsInChildren<FindedWord>();
         letters = wordZone.GetComponentsInChildren<LettersController>();
-        string[] temp = wordsList.Split('!');
+        string[] temp = wordsList.Split(new char[] { '\n' });
         audioManager = AudioManager.instanse;
         foreach(string s in temp)
         {
-            words.Add(s);
-            wordsTemp.Add(s);
+            char[] c = s.ToCharArray();
+            string newWord = "";
+            for (int i = 0; i < c.Length - 1; i++)
+                newWord += c[i];
+            words.Add(newWord);
+            wordsTemp.Add(newWord);
         }
         for(int i =0; i<findedWords.Length;i++)
         {
@@ -66,7 +69,6 @@ public class InputController : MonoBehaviour
         wordsAmount.text = x.ToString();
         totalWordsAmount.text = words.Count.ToString();
     }
-
     private void Load()
     {
         if (!PlayerPrefs.HasKey("Save" + lvlKey))
@@ -115,6 +117,7 @@ public class InputController : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Pause", 0) == 1)
             return;
+        Debug.Log(currentWord);
         if (wordsTemp.Contains(currentWord))
         {
 
