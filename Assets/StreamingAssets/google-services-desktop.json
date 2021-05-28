@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "938887882260",
+    "firebase_url": "https://words-88094367-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "words-88094367",
+    "storage_bucket": "words-88094367.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938887882260:android:e9a46380f63e1bbdca6901",
+        "android_client_info": {
+          "package_name": "com.LesGames.Words"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938887882260-ui23sshq3vn4l9fv8681h9k1plhdsuja.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.LesGames.Words",
+            "certificate_hash": "4fa583d463147bef286444880585d24702d53412"
+          }
+        },
+        {
+          "client_id": "938887882260-dd735lt16av0nvf61jcvg4dr615vnqdg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfOFVtEKgTbUcjnkt_qxBVVmZVtuO3Bdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938887882260-dd735lt16av0nvf61jcvg4dr615vnqdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
